@@ -3,7 +3,6 @@ package io.github.nanodankster.skriptnpc.skript;
 import java.util.Arrays;
 
 import org.bukkit.event.Event;
-import org.eclipse.jdt.annotation.Nullable;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
@@ -28,7 +27,6 @@ public class ExprPropCitizenSkin extends SimplePropertyExpression<SkriptCitizen,
     }
 
     @Override
-    @Nullable
     public String convert(SkriptCitizen skriptCitizen) {
         NPC npc = skriptCitizen.getNpc();
         return npc.isSpawned() ? ((SkinnableEntity) npc).getSkinName() : null;
@@ -45,7 +43,6 @@ public class ExprPropCitizenSkin extends SimplePropertyExpression<SkriptCitizen,
     }
 
     @Override
-    @Nullable
     public Class<?>[] acceptChange(Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET || mode == Changer.ChangeMode.DELETE || mode == Changer.ChangeMode.RESET)
             return CollectionUtils.array(String.class);
@@ -53,7 +50,7 @@ public class ExprPropCitizenSkin extends SimplePropertyExpression<SkriptCitizen,
     }
 
     @Override
-    public void change(Event e, @Nullable Object[] delta, Changer.ChangeMode mode) {
+    public void change(Event e, Object[] delta, Changer.ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET && delta == null)
             return;
         String skin = mode == Changer.ChangeMode.SET ? (String) delta[0] : "Steve";
